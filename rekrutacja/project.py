@@ -46,15 +46,20 @@ def choices(item):
 
     if item == "1":
         add_offer()
+
     elif item == "2":
         pass
+
     elif item == "3":
-        pass
+        update_offer()
+
     elif item == "4":
         show_offer()
+
     elif item == "5":
         print("Exiting the program. All changes have been saved. Goodbye!")
         sys.exit()
+
     else:
         print("Invalid choice, Please try 1-5")
 
@@ -102,6 +107,36 @@ def show_offer():
             print("-" * 30)
     else:
         print(f"\nNo offers to show.\n")
+
+
+# Update the offer
+def update_offer():
+    
+    show_offer()
+
+    try:
+        index = int(input("Enter the number of the offer you want to update: ")) - 1
+        if 0 <= index < len(offers):
+            print("\nEnter new details for the selected offer:")
+            link = input(f"Link (current: {offers[index]['link']}): ")
+            position = input(f"Position (current: {offers[index]['position']}): ")
+            date = input(f"Application date (current: {offers[index]['date']}): ")
+            salary_min = input(f"Minimum salary (current: {offers[index]['salary_min']}): ")
+            salary_max = input(f"Maximum salary (current: {offers[index]['salary_max']}): ")
+
+            offers[index] = {
+                "link": link,
+                "position": position,
+                "date": date,
+                "salary_min": salary_min,
+                "salary_max": salary_max
+            }
+            #save_offers()  # Zapisz oferty po aktualizacji
+            print(f"\nOffer for '{position}' has been updated.")
+        else:
+            print("Invalid number. No changes made.")
+    except ValueError:
+        print("Invalid input. Please enter a number.")
 
 
 if __name__ == "__main__":
