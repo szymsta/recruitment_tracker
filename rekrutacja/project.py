@@ -63,6 +63,7 @@ def add_offer():
 
     url = input("URL for the offer: ")
     position = input("Position I applied for: ")
+    company = input("Company name: ")
     date = input("Application date (YYYY-MM-DD): ")
     salary_min = input("Minimum salary: ")
     salary_max = input("Maximum salary: ")
@@ -71,6 +72,7 @@ def add_offer():
     offer = {
         "link": url,
         "position": position,
+        "company": company
         "date": date,
         "salary_min": salary_min,
         "salary_max": salary_max
