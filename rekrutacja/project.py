@@ -2,6 +2,7 @@
 import sys
 import json
 
+
 # Path offers
 path = "offers.json"
 
@@ -29,9 +30,9 @@ def main():
 # Print menu function
 def welcome():
 
-    print("*" * 30)
+    print(f"\n{'*' * 30}")
     print("Recruitment tracker")
-    print("*" * 30)
+    print(f"{'*' * 30} \n")
     print("Press number to choice what you want to do:")
     print("1. Add an offer I applied for")
     print("2. Remove an offer I applied for")
@@ -50,7 +51,7 @@ def choices(item):
     elif item == "3":
         pass
     elif item == "4":
-        pass
+        show_offer()
     elif item == "5":
         print("Exiting the program. All changes have been saved. Goodbye!")
         sys.exit()
@@ -67,8 +68,8 @@ def add_offer():
     position = input("Position I applied for: ")
     company = input("Company name: ")
     date = input("Application date (YYYY-MM-DD): ")
-    salary_min = input("Minimum salary: ")
-    salary_max = input("Maximum salary: ")
+    salary_min = float(input("Minimum salary (only numbers): "))
+    salary_max = float(input("Maximum salary (only numbers): "))
 
 
     # Create dict for offer
@@ -85,6 +86,22 @@ def add_offer():
     # Add offer to offers list
     offers.append(offer)
     print(f"\nOffer for '{position}' has been added.")
+
+
+# Show the offers that user applied for
+def show_offer():
+
+    if offers:
+        print("\n--- Offers you applied for ---")
+        for item, offer in enumerate(offers, start=1):
+            print(f"{item}. Position: {offer['position']}")
+            print(f"   Company: {offer["company"]}")
+            print(f"   Link: {offer['link']}")
+            print(f"   Application Date: {offer['date']}")
+            print(f"   Salary Range: {offer['salary_min']:,} PLN - {offer['salary_max']:,} PLN")
+            print("-" * 30)
+    else:
+        print(f"\nNo offers to show.\n")
 
 
 if __name__ == "__main__":
