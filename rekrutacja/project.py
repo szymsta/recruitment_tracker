@@ -72,7 +72,7 @@ def add_offer():
     offer = {
         "link": url,
         "position": position,
-        "company": company
+        "company": company,
         "date": date,
         "salary_min": salary_min,
         "salary_max": salary_max
