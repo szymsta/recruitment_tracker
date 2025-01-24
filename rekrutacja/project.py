@@ -1,12 +1,25 @@
 # Libraries
 import sys
+import json
+
+# Path offers
+path = "offers.json"
 
 
-# Empty list
-offers = []
+# Load the offers
+def load_offers():
+    try:
+        with open(path, "r", encoding = "UTF-8") as file:
+            return json.load(file)
+    except FileNotFoundError:
+        return []
+
 
 # Main function to initialize and run the script
 def main():
+    global offers
+    offers = load_offers()
+
     while True:
         welcome()
         choice = input("Enter your choice (1-5): ").strip()
@@ -38,7 +51,7 @@ def choices(item):
     elif item == "4":
         pass
     elif item == "5":
-        print("Exiting the program. All changes have been made. Goodbye!")
+        print("Exiting the program. All changes have been saved. Goodbye!")
         sys.exit()
     else:
         print("Invalid choice, Please try 1-5")
@@ -63,7 +76,7 @@ def add_offer():
         "salary_max": salary_max
     }
 
-    # Add offer to offer list
+    # Add offer to offers list
     offers.append(offer)
     print(f"\nOffer for '{position}' has been added.")
 
