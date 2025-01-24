@@ -28,6 +28,7 @@ def main():
 
 # Print menu function
 def welcome():
+
     print("*" * 30)
     print("Recruitment tracker")
     print("*" * 30)
@@ -39,7 +40,7 @@ def welcome():
     print("5. Exit program")
 
 
-# 
+# The function handling "user's" choice
 def choices(item):
 
     if item == "1":
@@ -58,6 +59,7 @@ def choices(item):
 
 
 def add_offer():
+
     # Details from user:
     print("\nEnter the details for the offer you applied for:")
 
@@ -67,6 +69,7 @@ def add_offer():
     date = input("Application date (YYYY-MM-DD): ")
     salary_min = input("Minimum salary: ")
     salary_max = input("Maximum salary: ")
+
 
     # Create dict for offer
     offer = {
@@ -78,9 +81,11 @@ def add_offer():
         "salary_max": salary_max
     }
 
+
     # Add offer to offers list
     offers.append(offer)
     print(f"\nOffer for '{position}' has been added.")
+
 
 if __name__ == "__main__":
     main()
