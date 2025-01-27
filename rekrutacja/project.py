@@ -68,7 +68,7 @@ def choices(item):
 # Add a new offer
 def add_offer():
     print("\nEnter the details for the offer you applied for:")
-    
+
     try:
         url = input("URL for the offer: ").strip()
         position = input("Position I applied for: ").strip()
@@ -86,7 +86,7 @@ def add_offer():
         
     except ValueError as e:
         print("\n" + except_sign)
-        print("Invalid input: {e}")
+        print(f"Invalid input: {e}")
         print(except_sign)
         return
 
@@ -113,11 +113,12 @@ def show_offer():
         print("\n--- Offers you applied for ---")
         for item, offer in enumerate(offers, start=1):
             print(f"{item}. Position: {offer['position']}")
-            print(f"   Company: {offer["company"]}")
+            print(f"   Company: {offer['company']}")
             print(f"   Link: {offer['link']}")
             print(f"   Application Date: {offer['date']}")
             print(f"   Salary Range: {offer['salary_min']:,} PLN - {offer['salary_max']:,} PLN")
-            print("-" * 30)
+            print(f"{'-' * 30}")
+
     else:
         print("\n" + except_sign)
         print(f"No offers to show.")
@@ -130,14 +131,16 @@ def update_offer():
     show_offer()
 
     try:
-        index = int(input("Enter the number of the offer you want to update: ")) - 1
+        index = int(input("Enter the number of the offer you want to update: ").strip()) - 1
+
         if 0 <= index < len(offers):
             print("\nEnter new details for the selected offer:")
-            link = input(f"Link (current: {offers[index]['link']}): ")
-            position = input(f"Position (current: {offers[index]['position']}): ")
-            date = input(f"Application date (current: {offers[index]['date']}): ")
-            salary_min = input(f"Minimum salary (current: {offers[index]['salary_min']}): ")
-            salary_max = input(f"Maximum salary (current: {offers[index]['salary_max']}): ")
+
+            link = input(f"Link (current: {offers[index]['link']}): ").strip()
+            position = input(f"Position (current: {offers[index]['position']}): ").strip()
+            date = input(f"Application date (current: {offers[index]['date']}): ").strip()
+            salary_min = float(input(f"Minimum salary (current: {offers[index]['salary_min']}): ").strip())
+            salary_max = float(input(f"Maximum salary (current: {offers[index]['salary_max']}): ").strip())
 
             offers[index] = {
                 "link": link,
@@ -146,12 +149,16 @@ def update_offer():
                 "salary_min": salary_min,
                 "salary_max": salary_max
             }
-            save_offers()  # Save after actualization
+
+            save_offers()  # Save after update
+
             print(f"\nOffer for '{position}' has been updated.")
+
         else:
             print("\n" + except_sign)
             print("Invalid number. No changes made.")
             print(except_sign)
+
     except ValueError:
         print("\n" + except_sign)
         print("Invalid input. Please enter a number.")
@@ -160,7 +167,9 @@ def update_offer():
 
 # Select and remove offer
 def remove_offer():
+
     show_offer()
+
     try:
         index = int(input("Enter the number of the offer you want to remove: ")) - 1
         if 0 <= index < len(offers):
@@ -171,10 +180,12 @@ def remove_offer():
             print("\n" + except_sign)
             print("Invalid number. No changes made.")
             print(except_sign)
+
     except ValueError:
         print("\n" + except_sign)
         print("Invalid input. Please enter a number.")
         print(except_sign)
+
 
 # Run if main
 if __name__ == "__main__":
