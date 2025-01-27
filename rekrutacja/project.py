@@ -46,6 +46,17 @@ def welcome():
     print("4. Show all offers I applied for")
     print("5. Exit program")
 
+
+# Get input data from user
+def get_input():
+    link = input("URL for the offer: ").strip()
+    position = input("Position I applied for: ").strip()
+    company = input("Company name: ").strip()
+    date = input("Application date (YYYY-MM-DD): ").strip()
+    salary_min = int(input("Minimum salary (only numbers): ").strip())
+    salary_max = int(input("Maximum salary (only numbers): ").strip())
+
+
 # The function handling "user's" choice
 def choices(item):
     if item == "1":
