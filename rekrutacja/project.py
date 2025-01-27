@@ -68,6 +68,7 @@ def choices(item):
 # Add a new offer
 def add_offer():
     print("\nEnter the details for the offer you applied for:")
+    
     try:
         url = input("URL for the offer: ").strip()
         position = input("Position I applied for: ").strip()
@@ -82,6 +83,7 @@ def add_offer():
         # Validate salay as positive number
         if salary_min <= 0 or salary_max <= 0:
             raise ValueError("Salary cannot be smaller than 0.")
+        
     except ValueError as e:
         print("\n" + except_sign)
         print("Invalid input: {e}")
