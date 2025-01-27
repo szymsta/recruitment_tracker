@@ -1,6 +1,7 @@
 # Libraries
 import sys
 import json
+from datetime import datetime
 
 
 # Path offers
@@ -11,14 +12,13 @@ except_sign = f"{'*' * 40}"
 # Load the offers from the file
 def load_offers():
     try:
-        with open(path, "r", encoding = "UTF-8") as file:
+        with open(path, "r", encoding="UTF-8") as file:
             return json.load(file)
     except FileNotFoundError:
         return []
 
-
 # Save the offers to the file
-def save_offers():
+def save_offers(offers):
     with open(path, "w", encoding="UTF-8") as file:
         json.dump(offers, file, indent=4)
 
@@ -36,7 +36,6 @@ def main():
 
 # Display the menu choices
 def welcome():
-
     print(f"\n{'=' * 30}")
     print("Recruitment tracker")
     print(f"{'=' * 30}\n")
@@ -47,50 +46,47 @@ def welcome():
     print("4. Show all offers I applied for")
     print("5. Exit program")
 
-
 # The function handling "user's" choice
 def choices(item):
-
     if item == "1":
         add_offer()
-
     elif item == "2":
         remove_offer()
-
     elif item == "3":
         update_offer()
-
     elif item == "4":
         show_offer()
-
     elif item == "5":
         print("Exiting the program. All changes have been saved. Goodbye!")
         sys.exit()
-
     else:
         print("\n" + except_sign)
         print("Invalid choice, Please try 1-5")
         print(except_sign)
 
 
+# Add a new offer
 def add_offer():
-
-    # Details from user:
     print("\nEnter the details for the offer you applied for:")
-
     try:
-        url = input("URL for the offer: ")
-        position = input("Position I applied for: ")
-        company = input("Company name: ")
-        date = input("Application date (YYYY-MM-DD): ")
-        salary_min = float(input("Minimum salary (only numbers): "))
-        salary_max = float(input("Maximum salary (only numbers): "))
-    except ValueError:
-        print("\n" + except_sign)
-        print("Invalid type, please provide number")
-        print(except_sign)
-        main()
+        url = input("URL for the offer: ").strip()
+        position = input("Position I applied for: ").strip()
+        company = input("Company name: ").strip()
+        date = input("Application date (YYYY-MM-DD): ").strip()
+        salary_min = float(input("Minimum salary (only numbers): ").strip())
+        salary_max = float(input("Maximum salary (only numbers): ").strip())
 
+        # Validate date format:
+        datetime.strptime(date, "%Y-%m-%d")
+
+        # Validate salay as positive number
+        if salary_min <= 0 or salary_max <= 0:
+            raise ValueError("Salary cannot be smaller than 0.")
+    except ValueError as e:
+        print("\n" + except_sign)
+        print("Invalid input: {e}")
+        print(except_sign)
+        return
 
     # Create dict for offer
     offer = {
@@ -104,7 +100,7 @@ def add_offer():
     
     # Add offer to offers list
     offers.append(offer)
-    save_offers()  # Save after actualization
+    save_offers(offers)  # Save after actualization
     print(f"\nOffer for '{position}' has been added.")
 
 
