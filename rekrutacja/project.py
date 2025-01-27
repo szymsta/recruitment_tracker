@@ -5,6 +5,7 @@ import json
 
 # Path offers
 path = "offers.json"
+except_sign = f"{'*' * 40}"
 
 
 # Load the offers
@@ -30,9 +31,9 @@ def main():
 # Print menu function
 def welcome():
 
-    print(f"\n{'*' * 30}")
+    print(f"\n{'=' * 30}")
     print("Recruitment tracker")
-    print(f"{'*' * 30} \n")
+    print(f"{'=' * 30}\n")
     print("Press number to choice what you want to do:")
     print("1. Add an offer I applied for")
     print("2. Remove an offer I applied for")
@@ -48,7 +49,7 @@ def choices(item):
         add_offer()
 
     elif item == "2":
-        pass
+        remove_offer()
 
     elif item == "3":
         update_offer()
@@ -61,7 +62,9 @@ def choices(item):
         sys.exit()
 
     else:
+        print("\n" + except_sign)
         print("Invalid choice, Please try 1-5")
+        print(except_sign)
 
 
 def add_offer():
@@ -69,12 +72,18 @@ def add_offer():
     # Details from user:
     print("\nEnter the details for the offer you applied for:")
 
-    url = input("URL for the offer: ")
-    position = input("Position I applied for: ")
-    company = input("Company name: ")
-    date = input("Application date (YYYY-MM-DD): ")
-    salary_min = float(input("Minimum salary (only numbers): "))
-    salary_max = float(input("Maximum salary (only numbers): "))
+    try:
+        url = input("URL for the offer: ")
+        position = input("Position I applied for: ")
+        company = input("Company name: ")
+        date = input("Application date (YYYY-MM-DD): ")
+        salary_min = float(input("Minimum salary (only numbers): "))
+        salary_max = float(input("Maximum salary (only numbers): "))
+    except ValueError:
+        print("\n" + except_sign)
+        print("Invalid type, please provide number")
+        print(except_sign)
+        main()
 
 
     # Create dict for offer
@@ -86,10 +95,10 @@ def add_offer():
         "salary_min": salary_min,
         "salary_max": salary_max
     }
-
-
+    
     # Add offer to offers list
     offers.append(offer)
+    save_offers()  # Save after actualization
     print(f"\nOffer for '{position}' has been added.")
 
 
@@ -106,7 +115,9 @@ def show_offer():
             print(f"   Salary Range: {offer['salary_min']:,} PLN - {offer['salary_max']:,} PLN")
             print("-" * 30)
     else:
-        print(f"\nNo offers to show.\n")
+        print("\n" + except_sign)
+        print(f"No offers to show.")
+        print(except_sign)
 
 
 # Update the offer
@@ -131,13 +142,41 @@ def update_offer():
                 "salary_min": salary_min,
                 "salary_max": salary_max
             }
-            #save_offers()  # Zapisz oferty po aktualizacji
+            save_offers()  # Save after actualization
             print(f"\nOffer for '{position}' has been updated.")
         else:
+            print("\n" + except_sign)
             print("Invalid number. No changes made.")
+            print(except_sign)
     except ValueError:
+        print("\n" + except_sign)
         print("Invalid input. Please enter a number.")
+        print(except_sign)
 
 
+# Select and remove offer
+def remove_offer():
+    show_offer()
+    try:
+        index = int(input("Enter the number of the offer you want to remove: ")) - 1
+        if 0 <= index < len(offers):
+            removed = offers.pop(index)
+            save_offers()  # Zapisz oferty po usunięciu
+            print(f"Offer for '{removed['position']}' has been removed.")
+        else:
+            print("\n" + except_sign)
+            print("Invalid number. No changes made.")
+            print(except_sign)
+    except ValueError:
+        print("\n" + except_sign)
+        print("Invalid input. Please enter a number.")
+        print(except_sign)
+
+# Save the offer
+def save_offers():
+    with open(path, "w", encoding="UTF-8") as file:
+        json.dump(offers, file, indent=4)
+
+# Run if main
 if __name__ == "__main__":
     main()
