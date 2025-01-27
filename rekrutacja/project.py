@@ -138,6 +138,7 @@ def update_offer():
 
             link = input(f"Link (current: {offers[index]['link']}): ").strip()
             position = input(f"Position (current: {offers[index]['position']}): ").strip()
+            company = input(f"Company (current: {offers[index]['company']}): ").strip()
             date = input(f"Application date (current: {offers[index]['date']}): ").strip()
             salary_min = float(input(f"Minimum salary (current: {offers[index]['salary_min']}): ").strip())
             salary_max = float(input(f"Maximum salary (current: {offers[index]['salary_max']}): ").strip())
@@ -145,6 +146,7 @@ def update_offer():
             offers[index] = {
                 "link": link,
                 "position": position,
+                "company": company,
                 "date": date,
                 "salary_min": salary_min,
                 "salary_max": salary_max
