@@ -8,13 +8,19 @@ path = "offers.json"
 except_sign = f"{'*' * 40}"
 
 
-# Load the offers
+# Load the offers from the file
 def load_offers():
     try:
         with open(path, "r", encoding = "UTF-8") as file:
             return json.load(file)
     except FileNotFoundError:
         return []
+
+
+# Save the offers to the file
+def save_offers():
+    with open(path, "w", encoding="UTF-8") as file:
+        json.dump(offers, file, indent=4)
 
 
 # Main function to initialize and run the script
@@ -28,7 +34,7 @@ def main():
         choices(choice)
 
 
-# Print menu function
+# Display the menu choices
 def welcome():
 
     print(f"\n{'=' * 30}")
@@ -171,11 +177,6 @@ def remove_offer():
         print("\n" + except_sign)
         print("Invalid input. Please enter a number.")
         print(except_sign)
-
-# Save the offer
-def save_offers():
-    with open(path, "w", encoding="UTF-8") as file:
-        json.dump(offers, file, indent=4)
 
 # Run if main
 if __name__ == "__main__":
