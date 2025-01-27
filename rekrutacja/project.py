@@ -150,7 +150,7 @@ def update_offer():
                 "salary_max": salary_max
             }
 
-            save_offers()  # Save after update
+            save_offers(offers)  # Save after update
 
             print(f"\nOffer for '{position}' has been updated.")
 
@@ -174,7 +174,7 @@ def remove_offer():
         index = int(input("Enter the number of the offer you want to remove: ")) - 1
         if 0 <= index < len(offers):
             removed = offers.pop(index)
-            save_offers()  # Zapisz oferty po usunięciu
+            save_offers(offers)  # Zapisz oferty po usunięciu
             print(f"Offer for '{removed['position']}' has been removed.")
         else:
             print("\n" + except_sign)
