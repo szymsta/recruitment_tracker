@@ -3,6 +3,7 @@ import sys
 import json
 from datetime import datetime
 import re
+from tabulate import tabulate # pip 
 
 
 # Path offers
@@ -145,14 +146,21 @@ def add_offer():
 def show_offer():
 
     if offers:
-        print("\n--- Offers you applied for ---")
+        headers = ["#","Position", "Company", "Link", "Application Date", "Salary Min", "Salary Max"]
+        table = []
+
         for item, offer in enumerate(offers, start=1):
-            print(f"{item}. Position: {offer['position']}")
-            print(f"   Company: {offer['company']}")
-            print(f"   Link: {offer['link']}")
-            print(f"   Application Date: {offer['date']}")
-            print(f"   Salary Range: {offer['salary_min']:,} PLN - {offer['salary_max']:,} PLN")
-            print(f"{'-' * 30}")
+            table.append([
+                item,
+                offer['position'],
+                offer['company'],
+                offer['link'],
+                offer['date'],
+                offer['salary_min'],
+                offer['salary_max']
+            ])
+
+        print(tabulate(table, headers=headers, tablefmt="pretty"))
 
     else:
         print("\n" + except_sign)
