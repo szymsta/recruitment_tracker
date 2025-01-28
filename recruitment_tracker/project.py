@@ -42,11 +42,11 @@ def welcome():
     print("Recruitment tracker")
     print(f"{'=' * 30}\n")
     print("Press a number to choose what you want to do:")
-    print("1. Add an offer I applied for")
-    print("2. Remove an offer I applied for")
-    print("3. Update an offer I applied for")
-    print("4. Show all offers I applied for")
-    print("5. Exit program")
+    print("    1. Add an offer I applied for")
+    print("    2. Remove an offer I applied for")
+    print("    3. Update an offer I applied for")
+    print("    4. Show all offers I applied for")
+    print("    5. Exit program")
 
 
 # Get input data from user
@@ -210,7 +210,7 @@ def update_offer():
         print(except_sign)
 
 
-# Select and remove offer
+# Select and remove the offer
 def remove_offer():
 
     show_offer()
@@ -219,7 +219,7 @@ def remove_offer():
         index = int(input("Enter the number of the offer you want to remove: ")) - 1
         if 0 <= index < len(offers):
             removed = offers.pop(index)
-            save_offers(offers)  # Zapisz oferty po usunięciu
+            save_offers(offers) # Save after update
             print(f"Offer for '{removed['position']}' has been removed.")
         else:
             print("\n" + except_sign)
