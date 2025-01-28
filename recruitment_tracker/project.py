@@ -3,7 +3,7 @@ import sys
 import json
 from datetime import datetime
 import re
-from tabulate import tabulate # pip 
+from tabulate import tabulate
 
 
 # Path offers
