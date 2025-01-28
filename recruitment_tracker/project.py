@@ -41,7 +41,7 @@ def welcome():
     print(f"\n{'=' * 30}")
     print("Recruitment tracker")
     print(f"{'=' * 30}\n")
-    print("Press number to choice what you want to do:")
+    print("Press a number to choose what you want to do:")
     print("1. Add an offer I applied for")
     print("2. Remove an offer I applied for")
     print("3. Update an offer I applied for")
