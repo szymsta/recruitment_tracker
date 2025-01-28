@@ -57,13 +57,15 @@ def get_input():
     salary_min = input("Minimum salary (only numbers): ").strip()
     salary_max = input("Maximum salary (only numbers): ").strip()
 
+    return url, position, company, date, salary_min, salary_max
+
 # Validate url format
 def validate_url_format(your_url):
     while True:
         if re.match(r"^(https?:\/\/|www\.)[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$", your_url):
             return your_url
         else:
-            print("Invalid url, please provide correct one")
+            print("\nInvalid url, please provide correct one")
             your_url = input("URL for the offer: ").strip()
 
 # Validate date format
@@ -73,7 +75,7 @@ def validate_date_format(your_date):
             datetime.strptime(your_date, "%Y-%m-%d")
             return your_date
         except ValueError:
-            print("Invalid date format. Enter correct date (YYYY-MM-DD)")
+            print(f"\nInvalid date format: '{your_date}'. Enter correct date 'YYYY-MM-DD'")
             your_date = input("Application date (YYYY-MM-DD): ").strip()
 
 # Validate salary amount
@@ -82,7 +84,7 @@ def validate_salary_amount(your_salary):
         if your_salary.isnumeric() and int(your_salary) > 0:
             return your_salary
         else:
-            print("Salary must be a positive number. Try again")
+            print("\nSalary must be a positive number. Try again")
             your_salary = input("Minimum salary (only numbers): ").strip()
 
 
@@ -109,24 +111,18 @@ def add_offer():
     print("\nEnter the details for the offer you applied for:")
 
     try:
-        url = input("URL for the offer: ").strip()
-        position = input("Position I applied for: ").strip()
-        company = input("Company name: ").strip()
-        date = input("Application date (YYYY-MM-DD): ").strip()
-        salary_min = float(input("Minimum salary (only numbers): ").strip())
-        salary_max = float(input("Maximum salary (only numbers): ").strip())
+        url, position, company, date, salary_min, salary_max = get_input() # Get details from user
 
-        # Validate date format:
-        datetime.strptime(date, "%Y-%m-%d")
+        # Validate data
+        url = validate_url_format(url)
+        date = validate_date_format(date)
+        salary_min = validate_salary_amount(salary_min)
+        salary_max = validate_salary_amount(salary_max)
 
-        # Validate salay as positive number
-        if salary_min <= 0 or salary_max <= 0:
-            raise ValueError("Salary cannot be smaller than 0.")
-        
+        print(f"Offer for position '{position}' at company '{company}' has been added.")
+
     except ValueError as e:
-        print("\n" + except_sign)
-        print(f"Invalid input: {e}")
-        print(except_sign)
+        print(f"Error: {e}")
         return
 
     # Create dict for offer
