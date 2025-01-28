@@ -34,8 +34,7 @@ Follow these steps to set up the project on your local machine:
 
 1. **Clone the Repository**:
     ```bash
-    git clone https://github.com/szymsta.git
-    cd project
+    git clone https://github.com/szymsta/recruitment_tracker.git
     ```
 
 2. **Install Dependencies**:
@@ -64,7 +63,7 @@ The script will present a menu with options, allowing you to interact with the p
 
 ## Menu
 
-When you run the script, you will be presented with a simple interactive menu. This menu allows you to choose one of the available actions by entering the corresponding number. The options are as follows:
+This menu allows you to choose one of the available actions by entering the corresponding number. The options are as follows:
 
 ```bash
 ==============================
