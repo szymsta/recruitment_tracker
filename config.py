@@ -6,3 +6,4 @@ class Config:
     FILE_WRITE_MODE = "w"
     SEPARATOR_LINE_STAR = "*" * 40
     SEPARATOR_LINE_EQUAL = "=" * 30 + "\n"
+    FILE_INDENT = 4

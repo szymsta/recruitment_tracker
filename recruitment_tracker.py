@@ -7,25 +7,17 @@ from tabulate import tabulate
 
 # Internal Modules
 from config import Config
-
-# Load the offers from the file
-def load_offers():
-    try:
-        with open(Config.FILE_PATH, Config.FILE_READ_MODE, encoding=Config.DEFAULT_ENCODING) as file: # get file_path, encoding from config
-            return json.load(file)
-    except FileNotFoundError:
-        return []
-
-# Save the offers to the file
-def save_offers(offers):
-    with open(path, Config.FILE_WRITE_MODE, encoding=Config.DEFAULT_ENCODING) as file:
-        json.dump(offers, file, indent=4)
+from file_manager.file_manager import FileManager
 
 
 # Main function to initialize and run the script
 def main():
+
+    file_manager = FileManager(Config.FILE_PATH)
     global offers
-    offers = load_offers()
+    offers = file_manager.load_offers()
+    
+
 
     while True:
         welcome()
@@ -135,7 +127,7 @@ def add_offer():
     
     # Add offer to offers list
     offers.append(offer)
-    save_offers(offers)  # Save after actualization
+    file_manager.save_offers(offers)  # Save after actualization
     print(f"\nOffer for '{position}' has been added.")
 
 
@@ -192,7 +184,7 @@ def update_offer():
                 "salary_max": salary_max
             }
 
-            save_offers(offers)  # Save after update
+            file_manager.save_offers(offers)  # Save after update
 
             print(f"\nOffer for '{position}' has been updated.")
 
@@ -216,7 +208,7 @@ def remove_offer():
         index = int(input("Enter the number of the offer you want to remove: ")) - 1
         if 0 <= index < len(offers):
             removed = offers.pop(index)
-            save_offers(offers) # Save after update
+            file_manager.save_offers(offers) # Save after update
             print(f"Offer for '{removed['position']}' has been removed.")
         else:
             print("\n" + Config.SEPARATOR_LINE_STAR)

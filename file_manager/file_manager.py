@@ -2,7 +2,7 @@
 import json
 
 # Internal modules
-from recruitment_tracker.config import Config
+from config import Config
 
 class FileManager:
 
