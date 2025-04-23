@@ -1,38 +1,32 @@
 # Libraries
 import sys
 import json
-from datetime import datetime
 import re
+from datetime import datetime
 from tabulate import tabulate
 
-
-# Path offers
-path = "offers.json"
-except_sign = f"{'*' * 40}"
-
-
-# Load the offers from the file
-def load_offers():
-    try:
-        with open(path, "r", encoding="UTF-8") as file:
-            return json.load(file)
-    except FileNotFoundError:
-        return []
-
-# Save the offers to the file
-def save_offers(offers):
-    with open(path, "w", encoding="UTF-8") as file:
-        json.dump(offers, file, indent=4)
+# Internal Modules
+from config import Config
+from file_manager.file_manager import FileManager
 
 
 # Main function to initialize and run the script
 def main():
+    # Step1: Create an instance of the FileManager class with the file path from config
+    file_manager = FileManager(Config.FILE_PATH)
+    # Step 2: Declare 'offers' as a global variable so it can be accessed outside this function
     global offers
-    offers = load_offers()
+    # Step 3: Load offers from the file using the FileManager and assign them to the 'offers' variable
+    offers = file_manager.load_offers()
+    
 
+    # Infinite loop to keep the program running until the user chooses to exit
     while True:
+        # Step1: Display a welcome message or menu
         welcome()
+        # Step 2: Prompt the user to enter their choice and remove leading/trailing whitespace
         choice = input("Enter your choice (1-5): ").strip()
+        # Step 3: Handle the user's choice (e.g., show offers, add new one, etc.)
         choices(choice)
 
 
@@ -103,9 +97,9 @@ def choices(item):
         print("Exiting the program. All changes have been saved. Goodbye!")
         sys.exit()
     else:
-        print("\n" + except_sign)
+        print("\n" + Config.SEPARATOR_LINE_STAR)
         print("Invalid choice, Please try 1-5")
-        print(except_sign)
+        print(Config.SEPARATOR_LINE_STAR)
 
 # Add a new offer
 def add_offer():
@@ -138,7 +132,7 @@ def add_offer():
     
     # Add offer to offers list
     offers.append(offer)
-    save_offers(offers)  # Save after actualization
+    file_manager.save_offers(offers)  # Save after actualization
     print(f"\nOffer for '{position}' has been added.")
 
 
@@ -163,9 +157,9 @@ def show_offer():
         print(tabulate(table, headers=headers, tablefmt="pretty"))
 
     else:
-        print("\n" + except_sign)
+        print("\n" + Config.SEPARATOR_LINE_STAR)
         print(f"No offers to show.")
-        print(except_sign)
+        print(Config.SEPARATOR_LINE_STAR)
 
 
 # Update the offer
@@ -195,19 +189,19 @@ def update_offer():
                 "salary_max": salary_max
             }
 
-            save_offers(offers)  # Save after update
+            file_manager.save_offers(offers)  # Save after update
 
             print(f"\nOffer for '{position}' has been updated.")
 
         else:
-            print("\n" + except_sign)
+            print("\n" + Config.SEPARATOR_LINE_STAR)
             print("Invalid number. No changes made.")
-            print(except_sign)
+            print(Config.SEPARATOR_LINE_STAR)
 
     except ValueError:
-        print("\n" + except_sign)
+        print("\n" + Config.SEPARATOR_LINE_STAR)
         print("Invalid input. Please enter a number.")
-        print(except_sign)
+        print(Config.SEPARATOR_LINE_STAR)
 
 
 # Select and remove the offer
@@ -219,17 +213,17 @@ def remove_offer():
         index = int(input("Enter the number of the offer you want to remove: ")) - 1
         if 0 <= index < len(offers):
             removed = offers.pop(index)
-            save_offers(offers) # Save after update
+            file_manager.save_offers(offers) # Save after update
             print(f"Offer for '{removed['position']}' has been removed.")
         else:
-            print("\n" + except_sign)
+            print("\n" + Config.SEPARATOR_LINE_STAR)
             print("Invalid number. No changes made.")
-            print(except_sign)
+            print(Config.SEPARATOR_LINE_STAR)
 
     except ValueError:
-        print("\n" + except_sign)
+        print("\n" + Config.SEPARATOR_LINE_STAR)
         print("Invalid input. Please enter a number.")
-        print(except_sign)
+        print(Config.SEPARATOR_LINE_STAR)
 
 
 # Run if main
