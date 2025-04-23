@@ -1,8 +1,8 @@
 # Libraries
 import sys
 import json
-from datetime import datetime
 import re
+from datetime import datetime
 from tabulate import tabulate
 
 # Internal Modules
@@ -12,16 +12,21 @@ from file_manager.file_manager import FileManager
 
 # Main function to initialize and run the script
 def main():
-
+    # Step1: Create an instance of the FileManager class with the file path from config
     file_manager = FileManager(Config.FILE_PATH)
+    # Step 2: Declare 'offers' as a global variable so it can be accessed outside this function
     global offers
+    # Step 3: Load offers from the file using the FileManager and assign them to the 'offers' variable
     offers = file_manager.load_offers()
     
 
-
+    # Infinite loop to keep the program running until the user chooses to exit
     while True:
+        # Step1: Display a welcome message or menu
         welcome()
+        # Step 2: Prompt the user to enter their choice and remove leading/trailing whitespace
         choice = input("Enter your choice (1-5): ").strip()
+        # Step 3: Handle the user's choice (e.g., show offers, add new one, etc.)
         choices(choice)
 
 
