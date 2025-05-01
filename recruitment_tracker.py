@@ -2,7 +2,6 @@
 import sys
 import json
 import re
-from datetime import datetime
 from tabulate import tabulate
 
 # Internal Modules
@@ -41,46 +40,6 @@ def welcome():
     print("    3. Update an offer I applied for")
     print("    4. Show all offers I applied for")
     print("    5. Exit program")
-
-
-# Get input data from user
-def get_input():
-    url = input("URL for the offer: ").strip()
-    position = input("Position I applied for: ").strip()
-    company = input("Company name: ").strip()
-    date = input("Application date (YYYY-MM-DD): ").strip()
-    salary_min = input("Minimum salary (only numbers): ").strip()
-    salary_max = input("Maximum salary (only numbers): ").strip()
-
-    return url, position, company, date, salary_min, salary_max
-
-# Validate url format
-def validate_url_format(your_url):
-    while True:
-        if re.match(r"^(https?:\/\/|www\.)[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$", your_url):
-            return your_url
-        else:
-            print("\nInvalid url, please provide correct one")
-            your_url = input("URL for the offer: ").strip()
-
-# Validate date format
-def validate_date_format(your_date):
-    while True:
-        try:
-            datetime.strptime(your_date, "%Y-%m-%d")
-            return your_date
-        except ValueError:
-            print(f"\nInvalid date format: '{your_date}'. Enter correct date 'YYYY-MM-DD'")
-            your_date = input("Application date (YYYY-MM-DD): ").strip()
-
-# Validate salary amount
-def validate_salary_amount(your_salary):
-    while True:
-        if your_salary.isnumeric() and int(your_salary) > 0:
-            return your_salary
-        else:
-            print("\nSalary must be a positive number. Try again")
-            your_salary = input("Minimum salary (only numbers): ").strip()
 
 
 # The function handling "user's" choice

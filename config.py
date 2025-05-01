@@ -14,3 +14,11 @@ class Config:
     SALARY_ERROR_MSG = "Salary must be a positive number."
     URL_ERROR_MSG = "Invalid URL. Try again."
     DATE_ERROR_MSG = "Invalid date format. Use YYYY-MM-DD."
+
+
+    PROMPT_URL = "URL: "
+    PROMPT_POSITION = "Position: "
+    PROMPT_COMPANY = "Company: "
+    PROMPT_DATE = "Date (YYYY-MM-DD): "
+    PROMPT_SALARY_MIN = "Minimum salary: "
+    PROMPT_SALARY_MAX = "Maximum salary: "
