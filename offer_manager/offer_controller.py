@@ -6,7 +6,7 @@ from config import Config
 
 class OfferController:
 
-        def __init__(self, offers, file_manager):
+    def __init__(self, offers, file_manager):
         self.offers = offers
         self.file_manager = file_manager
         self.input_handler = InputHandler()
