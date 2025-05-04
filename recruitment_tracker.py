@@ -1,12 +1,12 @@
 # Libraries
 import sys
-import json
-import re
 from tabulate import tabulate
 
 # Internal Modules
 from config import Config
 from file_manager.file_manager import FileManager
+from validator.validator import Validator
+from offer_manager.input_handler import InputHandler
 
 
 # Main function to initialize and run the script
