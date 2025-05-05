@@ -46,11 +46,13 @@ class FileManager:
         Returns:
             list: A list of offers loaded from the file. If the file is not found, an empty list is returned.
         """
-        try:
+        try: 
+            # Try to open and read the file
             with open(self.file_path, Config.FILE_READ_MODE, encoding=Config.DEFAULT_ENCODING) as file:
                 return json.load(file)
         
         except FileNotFoundError:
+            # If file doesn't exist, return an empty list
             return []
         
 
@@ -66,5 +68,6 @@ class FileManager:
         Returns:
             None
         """
+        # Open the file and write offers as JSON with indentation
         with open(self.file_path, Config.FILE_WRITE_MODE, encoding=Config.DEFAULT_ENCODING) as file:
             json.dump(offers, file, indent=Config.FILE_INDENT)
