@@ -50,7 +50,7 @@ class Validator:
         # Loop until the URL matches the configured regex
         while not re.match(Config.URL_PATTERN, your_url): 
             print(Config.URL_ERROR_MSG)
-            your_url = input("URL: ").strp()
+            your_url = input("URL: ").strip()
         return your_url
 
 
