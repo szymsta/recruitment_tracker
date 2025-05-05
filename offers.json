@@ -1,0 +1,10 @@
+[
+    {
+        "link": "https://www.example.com/job/software-engineer",
+        "position": "Big Data Engineer",
+        "company": "Example Inc.",
+        "date": "2025-05-05",
+        "salary_min": "10",
+        "salary_max": "20"
+    }
+]
