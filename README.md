@@ -55,7 +55,7 @@ Once you’ve installed the dependencies and verified the required files, you ca
 To start the script, open your terminal or command prompt and execute:
 
 ```bash
-python project.py
+python recruitment_tracker.py
 ```
 The script will present a menu with options, allowing you to interact with the program.
 
@@ -87,12 +87,12 @@ For example, after selecting 1, enter the details of the job offer you are apply
 
 ```bash
 Enter the details for the offer you applied for:
-URL for the offer: https://www.example.com/job/software-engineer
-Position I applied for: Software Engineer
+URL for the offer: https://www.example.com/job/bigdata-engineer
+Position I applied for: Big Data Engineer
 Company name: Example Inc.
-Application date (YYYY-MM-DD): 2025-01-01
-Minimum salary (only numbers): 60000
-Maximum salary (only numbers): 80000
+Application date (YYYY-MM-DD): 2025-05-05
+Minimum salary (only numbers): 10
+Maximum salary (only numbers): 20
 ```
 After adding some job offers, you can view them all by selecting option 4 (Show all offers). The offers will be displayed in a neatly formatted table:
 
@@ -100,7 +100,7 @@ After adding some job offers, you can view them all by selecting option 4 (Show 
 +---+-------------------+--------------+-------------------------------------------+-------------------+------------+------------+
 | # | Position          | Company      | Link                                      | Application Date  | Salary Min | Salary Max |
 +---+-------------------+--------------+-------------------------------------------+-------------------+------------+------------+
-| 1 | Software Engineer | Example Inc. | https://www.example.com/job/software-engineer | 2025-01-01      | 60000      | 80000      |
+| 1 | Big Data Engineer | Example Inc. | https://www.example.com/job/bigdata-engineer | 2025-05-05      | 10      | 20      |
 +---+-------------------+--------------+-------------------------------------------+-------------------+------------+------------+
 ```
 
@@ -108,7 +108,7 @@ After adding some job offers, you can view them all by selecting option 4 (Show 
 
 ## Additional Features and Functionality
 
-- Input Validation - The script ensures that the data entered for the offer is valid:
+- Validation - The script ensures that the data entered for the offer is valid:
 
   - URL Validation: The URL must be in the proper format (e.g., https://www.example.com).
   - Date Validation: The application date must be in the YYYY-MM-DD format.
@@ -122,11 +122,16 @@ Here's a breakdown of the project files:
 
 ```bash
 /recruitment_tracker
-    ├── offers.json          # Stores the job offer data.
-    ├── project.py           # Main Python script for the Recruitment Tracker.
-    └── requirements.txt     # List of dependencies (for easy installation).
+    ├── offers.json             # Stores the job offer data.
+    ├── recruitment_tracker.py  # Main Python script for the Recruitment Tracker.
+    ├── requirements.txt        # List of dependencies (for easy installation).
+    ├── config.py               # Configuration file containing constants used throughout the project.
+    ├── validator/              # Directory containing the Validator class for input validation.
+    │   └── validator.py        # Contains validation methods for URL, date, and salary inputs.
+    ├── offer_manager/          # Directory for managing offers
+    │   └── offer_controller.py # Manages add/show/update/remove operations.
+    │   └── input_handler.py    # Collects user input for offers.
+    ├── file_manager/           # Directory for file manager
+    │   └── file_manager.py     # Manages file reading and writing for offers.
+    └── README.md               # Project documentation, describing the project and setup instructions.
 ```
-
-- **offers.json**: This file holds the list of job offers in a JSON format. It is automatically created and updated by the script.
-- **project.py**: This is the main Python script that contains all the logic for adding, updating, removing, and displaying job offers.
-- **requirements.txt**: A file that lists the required Python libraries. To install them, simply run pip install -r requirements.txt.
