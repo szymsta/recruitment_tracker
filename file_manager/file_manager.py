@@ -20,7 +20,10 @@ class FileManager:
         save_offers(offers): Saves the provided list of offers to the file specified by `file_path`, using the configurations for file write mode and encoding.
 
     Constants:
-        None
+        FILE_READ_MODE (str): The mode used for reading the file (from `Config`).
+        FILE_WRITE_MODE (str): The mode used for writing to the file (from `Config`).
+        DEFAULT_ENCODING (str): The default encoding used for reading and writing the file (from `Config`).
+        FILE_INDENT (int): The indentation level used for writing JSON data (from `Config`).
 
     Args:
         file_path (str): The file path to load from or save to. This path should point to a valid file location on the system.
