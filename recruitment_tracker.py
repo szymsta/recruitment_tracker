@@ -17,7 +17,7 @@ def main():
     offers = []
     
     # Create controller with required dependencies
-    offer_controller = OfferController(file_manager, offers)
+    offer_controller = OfferController(offers, file_manager)
 
     # Infinite loop to keep the program running until the user chooses to exit
     while True:
