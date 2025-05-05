@@ -23,7 +23,7 @@ def main():
     while True:
         welcome()
         choice = input("Enter your choice (1-5): ").strip()
-        handle_choice(choice, offer_controller)
+        choices(choice, offer_controller)
 
 
 # Display the menu choices
@@ -41,15 +41,15 @@ def welcome():
 
 # The function handling "user's" choice
 def choices(choice, offer_controller):
-    if item == "1":
+    if choice == "1":
         offer_controller.add_offer()
-    elif item == "2":
+    elif choice == "2":
         offer_controller.remove_offer()
-    elif item == "3":
+    elif choice == "3":
         offer_controller.update_offer()
-    elif item == "4":
+    elif choice == "4":
         offer_controller.show_offers()
-    elif item == "5":
+    elif choice == "5":
         print("Exiting the program. All changes have been saved. Goodbye!")
         sys.exit()
     else:
